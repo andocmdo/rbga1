@@ -1,5 +1,6 @@
 require 'json'
 require 'time'
+require_relative 'agent.rb'
 
 if ARGV[0] != nil && ARGV[1] != nil
   config = JSON.parse(File.read(ARGV[0]))
@@ -8,6 +9,9 @@ else
   puts "Usage: ruby rbga1.rb [configFile.json] [dataFile.json]"
   exit
 end
+
+# set the control for some janky debug printing...
+debug = config["system"]["debug"]
 
 # The way to parse the date and make an integer timestamp for the last second of that day
 # since more records may exist in the future in the database at hourly/minute intervals earlier in the day
@@ -19,7 +23,7 @@ end
 start_date = Time.strptime(config["inputData"]["startDate"], "%Y-%m-%d")
 end_date = Time.strptime(config["inputData"]["endDate"], "%Y-%m-%d") + 86399
 
-puts "Start date: #{start_date} \tEnd Date: #{end_date}"
+puts "Start date: #{start_date} \tEnd Date: #{end_date}" if debug
 
 ## hopefully the records_hash is kept in order, (which I believe it is in modern versions of Ruby)
 ## So we will start at the beginning of the list, and check for the first included record and note the index
@@ -36,17 +40,25 @@ records_hash.each do |key, sub_hash|
   end
 end
 
-puts "Found and loaded #{records_array.size} records."
+puts "Found and loaded #{records_array.size} records." if debug
 
-records_array.each do |record|
-  print "#{record["date"]} "
-end
+#puts "Raw data: "
+#records_array.each do |record|
+#  print "#{record["date"]} "
+#end
 
-puts "Sorting array..."
+puts "Sorting records..." if debug
 records_array.sort! {|a, b| a["timestamp"] <=> b["timestamp"]}
 
-puts "Sorted array: "
-records_array.each do |record|
-  print "#{record["date"]} "
-end
+#puts "Sorted array: "
+#records_array.each do |record|
+#  print "#{record["date"]} "
+#end
 
+# Let's get started!
+puts "Creating population." if debug
+population_size = config["ga"]["populationSize"]
+population = Array.new
+(0...population_size).each do
+  population << Agent.new()
+end

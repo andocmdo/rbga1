@@ -1,6 +1,13 @@
 {
+  "system": {
+    "debug": true
+  },
   "inputData": {
-    "startDate": "2018-07-30",
-    "endDate": "2019-07-31"
+    "startDate": "2017-07-30",
+    "endDate": "2019-07-30"
+  },
+  "ga": {
+    "populationSize": 150,
+    "mutationRate": 0.07
   }
 }
