@@ -13,5 +13,8 @@
     "mutation_rate": 0.02,
     "xover_pool_multiplier": 2,
     "xover_pool_min_bias": 1
+  },
+  "agent": {
+    "starting_cash": 10000.00
   }
 }
