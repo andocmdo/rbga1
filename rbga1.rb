@@ -60,6 +60,8 @@ records_array.sort! {|a, b| a["timestamp"] <=> b["timestamp"]}
 puts "Creating population." if debug
 population_size = config["ga"]["population_size"]
 population = Array.new
+agent_params = { "number_of_genes" => records_array.size }
+puts agent_params
 (0...population_size).each do
   population << SimpleMaxAgent.new(agent_params)  # It would be cool to choose differnt agents from the config file
 end
@@ -91,7 +93,7 @@ max_generations = config["ga"]["max_generations"]
   population.each do |agent|
     # add n number of agent copies to the mating pool according to xover_pool_multiplier
     # and always add at least 1 no matter what (everyone gets a chance)
-    (0...((agent.fitness * xover_pool_multiplier + xover_pool_min_bias).to_i + xover_pool_min_bias)).each do
+    (0...((agent.fitness * xover_pool_multiplier).to_i + xover_pool_min_bias)).each do
       xover_pool << agent
     end
   end # xover pool filling loop end
@@ -118,4 +120,4 @@ end # End generation/simulation loop
 puts "\n\nSimulation Complete! Final stats:"
 #stats.print_generations_summary
 #stats.print_high_scores_with_actions
-stats.print_high_scores_with_genes
+#stats.print_high_scores_with_genes
