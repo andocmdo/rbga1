@@ -8,13 +8,15 @@
     "end_date": "2019-07-30"
   },
   "ga": {
-    "max_generations": 100,
+    "max_generations": 1000,
     "population_size": 100,
     "mutation_rate": 0.02,
     "xover_pool_multiplier": 2,
-    "xover_pool_min_bias": 1
+    "xover_pool_min_bias": 0
   },
   "agent": {
-    "starting_cash": 10000.00
+    "starting_cash": 10000.00,
+    "settle_interval": 2,
+    "trade_cost": 4.95
   }
 }

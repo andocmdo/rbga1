@@ -43,24 +43,15 @@ end
 
 puts "Found and loaded #{records_array.size} records." if debug
 
-#puts "Raw data: "
-#records_array.each do |record|
-#  print "#{record["date"]} "
-#end
-
 puts "Sorting records..." if debug
 records_array.sort! {|a, b| a["timestamp"] <=> b["timestamp"]}
-
-#puts "Sorted array: "
-#records_array.each do |record|
-#  print "#{record["date"]} "
-#end
 
 # Let's get started!
 puts "Creating population." if debug
 population_size = config["ga"]["population_size"]
 population = Array.new
-agent_params = { "number_of_genes" => records_array.size }
+agent_params = config["agent"]
+agent_params["number_of_genes"] = records_array.size
 puts agent_params
 (0...population_size).each do
   population << SimpleMaxAgent.new(agent_params)  # It would be cool to choose differnt agents from the config file
