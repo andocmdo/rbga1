@@ -1,6 +1,6 @@
 {
   "general": {
-    "debug": true,
+    "debug": false,
     "number_of_high_scores": 10
   },
   "inputData": {
@@ -8,7 +8,7 @@
     "end_date": "2019-07-30"
   },
   "ga": {
-    "max_generations": 1000,
+    "max_generations": 100,
     "population_size": 100,
     "mutation_rate": 0.02,
     "xover_pool_multiplier": 2,

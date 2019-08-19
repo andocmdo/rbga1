@@ -52,7 +52,7 @@ population_size = config["ga"]["population_size"]
 population = Array.new
 agent_params = config["agent"]
 agent_params["number_of_genes"] = records_array.size
-puts agent_params
+#puts agent_params
 (0...population_size).each do
   population << SimpleMaxAgent.new(agent_params)  # It would be cool to choose differnt agents from the config file
 end
@@ -110,5 +110,5 @@ end # End generation/simulation loop
 
 puts "\n\nSimulation Complete! Final stats:"
 #stats.print_generations_summary
-#stats.print_high_scores_with_actions
+stats.print_high_scores_with_actions
 #stats.print_high_scores_with_genes
