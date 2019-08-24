@@ -29,6 +29,7 @@ class SimpleMaxAgent < Agent
     @number_of_genes.times do
       @genes << @possible_actions.sample
     end
+    
   end
 
 
@@ -45,7 +46,7 @@ class SimpleMaxAgent < Agent
         end
       end
 
-      # JANK? 
+      # JANK?
       if @genes[index] == "b"
         # bookeeping first
         purchase_price = record["4. close"].to_f # JANK
@@ -59,7 +60,7 @@ class SimpleMaxAgent < Agent
         else
           add_action_to_log("unsuccessful_buy", record, index)
         end
-      elsif @genes[index] = "s"
+      elsif @genes[index] == "s"
         if @shares >= 1
           sale_price = record["4. close"].to_f # JANK
           transaction_profit = @shares * sale_price
