@@ -1,5 +1,6 @@
 require 'json'
 require 'time'
+require 'faraday'
 require_relative 'agent.rb'
 require_relative 'high_scores.rb'
 
@@ -83,7 +84,7 @@ max_generations = config["ga"]["max_generations"]
   xover_pool = Array.new
   population.each do |agent|
     # add n number of agent copies to the mating pool according to xover_pool_multiplier
-    # and always add at least 1 no matter what (everyone gets a chance)
+    # and always add at least xover_min_bias
     (0...((agent.fitness * xover_pool_multiplier).to_i + xover_pool_min_bias)).each do
       xover_pool << agent
     end
